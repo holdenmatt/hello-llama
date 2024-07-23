@@ -2,13 +2,30 @@
 
 import { useChat } from "ai/react";
 import { ArrowUp } from "lucide-react";
+import { useCallback, useRef } from "react";
 
+import { ExpandableTextarea } from "@/components/atoms/ExpandableTextarea";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Dispatch certain keys to command input
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter") {
+      if (e.shiftKey) {
+        // Add a new line
+      } else {
+        // Submit the form
+        e.preventDefault();
+        formRef.current?.requestSubmit();
+      }
+    }
+  }, []);
+
   return (
     <div className="flex h-screen w-full flex-col overflow-hidden">
       <div className="sticky top-0 z-10 flex h-14 items-center">Header</div>
@@ -22,26 +39,46 @@ export default function Chat() {
                 {m.content}
               </div>
             ))}
-
+          </div>
+          <div className="sticky bottom-0 w-full pt-6">
             <form
+              ref={formRef}
               onSubmit={handleSubmit}
-              className="fixed bottom-0 mb-8 flex w-full max-w-3xl items-center gap-2"
+              className="mb-4 flex w-full flex-col gap-4"
             >
-              <Input
-                className="h-14 rounded-full px-5 text-base"
-                value={input}
-                placeholder="Chat with Llama 3.1"
-                onChange={handleInputChange}
-              />
-              <Button
-                type="submit"
-                className={cn(
-                  "rounded-full bg-gray-400 px-2.5 opacity-50 transition duration-300 group-hover:opacity-100",
-                  input && "bg-primary",
+              <div className="group relative flex w-full items-center">
+                <ExpandableTextarea
+                  className="rounded-[30px] px-6 py-4 pr-28 text-lg"
+                  value={input}
+                  placeholder="Hello, Llama"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                />
+                <div className="absolute right-0 mx-4">
+                  <Button
+                    type="submit"
+                    className={cn(
+                      "rounded-full bg-gray-400 px-2.5 opacity-50 transition duration-300 group-hover:opacity-100",
+                      input && "bg-primary",
+                    )}
+                  >
+                    <ArrowUp className="h-5 w-5" />
+                  </Button>
+                </div>
+              </div>
+              <div className="mx-auto text-xs text-muted-foreground">
+                {input.length > 3 ? (
+                  <>
+                    Use{" "}
+                    <span className="rounded-md bg-slate-100 p-1">shift + return</span>{" "}
+                    for a new line
+                  </>
+                ) : (
+                  "Built with..."
                 )}
-              >
-                <ArrowUp className="h-5 w-5" />
-              </Button>
+              </div>
             </form>
           </div>
         </div>
