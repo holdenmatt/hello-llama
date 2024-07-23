@@ -5,6 +5,7 @@ import { ArrowUp } from "lucide-react";
 import { useCallback, useRef } from "react";
 
 import { ExpandableTextarea } from "@/components/atoms/ExpandableTextarea";
+import { ExternalLink } from "@/components/atoms/ExternalLink";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -67,7 +68,20 @@ export function Chat() {
                 new line
               </>
             ) : (
-              "Built with..."
+              <>
+                {`Built with `}
+                <ExternalLink href="https://llama.meta.com/docs/overview">
+                  Llama 3.1
+                </ExternalLink>
+                {`, `}
+                <ExternalLink href="https://wow.groq.com/now-available-on-groq-the-largest-and-most-capable-openly-available-foundation-model-to-date-llama-3-1-405b/">
+                  Groq
+                </ExternalLink>
+                {`, and the `}
+                <ExternalLink href="https://sdk.vercel.ai/docs/guides/llama-3_1">
+                  Vercel AI SDK
+                </ExternalLink>
+              </>
             )}
           </div>
         </form>
