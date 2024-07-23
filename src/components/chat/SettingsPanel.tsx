@@ -53,9 +53,9 @@ export function SettingsPanel() {
         </SheetTrigger>
       </Tooltip>
       <SheetContent className="data-[state=closed]:duration-200 data-[state=open]:duration-200">
-        <SheetHeader>
+        <SheetHeader className="text-left">
           <SheetTitle>Settings</SheetTitle>
-          <SheetDescription>
+          <SheetDescription className="max-w-48">
             {`Configure Llama 3.1 settings used by `}
             <ExternalLink href="https://console.groq.com/docs/models">Groq</ExternalLink>.
           </SheetDescription>

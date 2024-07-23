@@ -72,7 +72,7 @@ export function Chat() {
               </Button>
             </div>
           </div>
-          <div className="mx-auto text-xs text-muted-foreground">
+          <div className="mx-auto text-center text-xs leading-5 text-muted-foreground">
             {input.length > 3 ? (
               <>
                 Use <span className="rounded-md bg-muted p-1">shift + return</span> for a
@@ -80,9 +80,10 @@ export function Chat() {
               </>
             ) : (
               <>
-                {`Built by `}
+                {`Made by `}
                 <ExternalLink href="https://x.com/holdenmatt">@holdenmatt</ExternalLink>
                 {` using `}
+                <br className="sm:hidden" />
                 <ExternalLink href="https://llama.meta.com/docs/overview">
                   Llama 3.1
                 </ExternalLink>
