@@ -7,20 +7,31 @@ import { useCallback, useRef } from "react";
 import { ExpandableTextarea } from "@/components/atoms/ExpandableTextarea";
 import { ExternalLink } from "@/components/atoms/ExternalLink";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useToast } from "@/components/ui/use-toast";
 import { ModelName } from "@/lib/types";
 import { useAppStore } from "@/lib/useAppStore";
 import { cn } from "@/lib/utils";
 
-import { ScrollArea } from "../ui/scroll-area";
 import { ChatMessages } from "./ChatMessage";
 
 export function Chat() {
+  const { toast } = useToast();
   const model = useAppStore((state) => state.model);
   const temperature = useAppStore((state) => state.temperature);
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     body: {
       model,
       temperature,
+    },
+    onError: (error) => {
+      console.error(error);
+      toast({
+        variant: "destructive",
+        title: "Rate limit exceeded",
+        description:
+          "Groq's free plan is limited to 30 requests/min. Please try again later.",
+      });
     },
   });
 
