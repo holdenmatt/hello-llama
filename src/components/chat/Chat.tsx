@@ -50,7 +50,7 @@ export function Chat() {
           onSubmit={handleSubmit}
           className="mb-4 flex w-full flex-col gap-4"
         >
-          <div className="group relative flex w-full items-center">
+          <div className="group relative flex w-full items-center px-1">
             <ExpandableTextarea
               className="rounded-[30px] px-6 py-4 pr-16 text-base"
               value={input}
