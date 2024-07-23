@@ -1,3 +1,5 @@
+"use client";
+
 import { Settings2 } from "lucide-react";
 
 import { ExternalLink } from "@/components/atoms/ExternalLink";
@@ -20,8 +22,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useAppStore } from "@/lib/useAppStore";
 
 export function SettingsPanel() {
+  const temperature = useAppStore((state) => state.temperature);
+  const setTemperature = useAppStore((state) => state.setTemperature);
+
   return (
     <Sheet>
       <Tooltip content="Settings">
@@ -69,20 +75,12 @@ export function SettingsPanel() {
                 </SelectItem>
                 <SelectItem value="llama-3.1-70b-versatile">
                   <div className="flex items-start gap-3 text-muted-foreground">
-                    <div className="grid gap-0.5">
-                      <p>
-                        Llama 3.1 <span className="font-medium text-foreground">70B</span>
-                      </p>
-                    </div>
+                    Llama 3.1 <span className="font-medium text-foreground">70B</span>
                   </div>
                 </SelectItem>
                 <SelectItem value="llama-3.1-8b-instant">
                   <div className="flex items-start gap-3 text-muted-foreground">
-                    <div className="grid gap-0.5">
-                      <p>
-                        Llama 3.1 <span className="font-medium text-foreground">8B</span>
-                      </p>
-                    </div>
+                    Llama 3.1 <span className="font-medium text-foreground">8B</span>
                   </div>
                 </SelectItem>
               </SelectContent>
@@ -91,7 +89,12 @@ export function SettingsPanel() {
 
           <div className="grid gap-3">
             <Label htmlFor="temperature">Temperature</Label>
-            <Input id="temperature" type="number" placeholder="0.5" />
+            <Input
+              id="temperature"
+              type="number"
+              value={temperature}
+              onChange={(e) => setTemperature(e.target.value)}
+            />
           </div>
         </fieldset>
       </SheetContent>

@@ -7,12 +7,18 @@ import { useCallback, useRef } from "react";
 import { ExpandableTextarea } from "@/components/atoms/ExpandableTextarea";
 import { ExternalLink } from "@/components/atoms/ExternalLink";
 import { Button } from "@/components/ui/button";
+import { useAppStore } from "@/lib/useAppStore";
 import { cn } from "@/lib/utils";
 
 import { ChatMessages } from "./ChatMessage";
 
 export function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const temperature = useAppStore((state) => state.temperature);
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    body: {
+      temperature,
+    },
+  });
 
   const formRef = useRef<HTMLFormElement>(null);
 
