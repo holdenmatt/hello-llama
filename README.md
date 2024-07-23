@@ -4,9 +4,6 @@ This is a simple open source chat bot, built with:
 - The [Vercel AI SDK](https://sdk.vercel.ai/docs/guides/llama-3_1)
 - [NextJS](https://nextjs.org/), [shadcn/ui](https://ui.shadcn.com/)
 
-
-GROQ_API_KEY
-
 ## Getting Started
 
 In the project root, create a `.env.local` file and add your Groq API key:
