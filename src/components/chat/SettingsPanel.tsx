@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetContent,
@@ -22,6 +23,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Slider } from "@/components/ui/slider";
 import { useAppStore } from "@/lib/useAppStore";
 
 export function SettingsPanel() {
@@ -29,6 +31,17 @@ export function SettingsPanel() {
   const setModel = useAppStore((state) => state.setModel);
   const temperature = useAppStore((state) => state.temperature);
   const setTemperature = useAppStore((state) => state.setTemperature);
+
+  const handleTemperatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    if (!isNaN(value) && value >= 0) {
+      setTemperature(value);
+    }
+  };
+
+  const handleTemperatureBlur = () => {
+    setTemperature(Math.min(1, Math.max(0, parseFloat(temperature.toFixed(2)))));
+  };
 
   return (
     <Sheet>
@@ -47,7 +60,10 @@ export function SettingsPanel() {
             <ExternalLink href="https://console.groq.com/docs/models">Groq</ExternalLink>.
           </SheetDescription>
         </SheetHeader>
-        <fieldset className="mt-8 grid gap-8">
+
+        <Separator className="my-6" />
+
+        <div className="grid gap-8">
           <div className="grid gap-3">
             <Label htmlFor="model">Model</Label>
             <Select
@@ -101,15 +117,32 @@ export function SettingsPanel() {
           </div>
 
           <div className="grid gap-3">
-            <Label htmlFor="temperature">Temperature</Label>
-            <Input
+            <div className="group flex items-center justify-between">
+              <Label htmlFor="temperature">Temperature</Label>
+              <Input
+                type="number"
+                step="0.01"
+                min="0"
+                className="h-9 w-12 border-transparent px-1 text-right hover:border-border"
+                value={temperature}
+                onChange={handleTemperatureChange}
+                onBlur={handleTemperatureBlur}
+              />
+            </div>
+            <Slider
               id="temperature"
-              type="number"
-              value={temperature}
-              onChange={(e) => setTemperature(e.target.value)}
+              min={0}
+              max={1}
+              step={0.1}
+              value={[temperature]}
+              onValueChange={(value) => {
+                if (value.length === 1) {
+                  setTemperature(value[0]);
+                }
+              }}
             />
           </div>
-        </fieldset>
+        </div>
       </SheetContent>
     </Sheet>
   );
