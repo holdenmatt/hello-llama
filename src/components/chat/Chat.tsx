@@ -7,6 +7,7 @@ import { useCallback, useRef } from "react";
 import { ExpandableTextarea } from "@/components/atoms/ExpandableTextarea";
 import { ExternalLink } from "@/components/atoms/ExternalLink";
 import { Button } from "@/components/ui/button";
+import { ModelName } from "@/lib/types";
 import { useAppStore } from "@/lib/useAppStore";
 import { cn } from "@/lib/utils";
 
@@ -37,6 +38,8 @@ export function Chat() {
     }
   }, []);
 
+  const placeholder = `Message ${getModelName(model)}`;
+
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col">
       <ChatMessages messages={messages} />
@@ -51,7 +54,7 @@ export function Chat() {
             <ExpandableTextarea
               className="rounded-[30px] px-6 py-4 pr-16 text-base"
               value={input}
-              placeholder="Hello, Llama"
+              placeholder={placeholder}
               autoComplete="off"
               autoCorrect="off"
               onChange={handleInputChange}
@@ -77,7 +80,9 @@ export function Chat() {
               </>
             ) : (
               <>
-                {`Built with `}
+                {`Built by `}
+                <ExternalLink href="https://x.com/holdenmatt">@holdenmatt</ExternalLink>
+                {` using `}
                 <ExternalLink href="https://llama.meta.com/docs/overview">
                   Llama 3.1
                 </ExternalLink>
@@ -96,4 +101,17 @@ export function Chat() {
       </div>
     </div>
   );
+}
+
+function getModelName(model: ModelName) {
+  switch (model) {
+    case "llama-3.1-8b-instant":
+      return "Llama 3.1 (8B)";
+    case "llama-3.1-70b-versatile":
+      return "Llama 3.1 (70B)";
+    case "llama-3.1-405b-reasoning":
+      return "Llama 3.1 (405B)";
+    default:
+      return "Llama 3.1";
+  }
 }
