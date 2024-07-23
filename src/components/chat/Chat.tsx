@@ -11,6 +11,7 @@ import { ModelName } from "@/lib/types";
 import { useAppStore } from "@/lib/useAppStore";
 import { cn } from "@/lib/utils";
 
+import { ScrollArea } from "../ui/scroll-area";
 import { ChatMessages } from "./ChatMessage";
 
 export function Chat() {
@@ -42,7 +43,9 @@ export function Chat() {
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col">
-      <ChatMessages messages={messages} />
+      <ScrollArea className="flex-1">
+        <ChatMessages messages={messages} />
+      </ScrollArea>
 
       <div className="sticky bottom-0 w-full pt-6">
         <form
