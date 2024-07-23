@@ -4,6 +4,7 @@ import { useChat } from "ai/react";
 import { ArrowUp } from "lucide-react";
 import { useCallback, useRef } from "react";
 
+import { DarkModeToggle } from "@/components/atoms/DarkModeToggle";
 import { ExpandableTextarea } from "@/components/atoms/ExpandableTextarea";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -27,12 +28,15 @@ export default function Chat() {
   }, []);
 
   return (
-    <div className="flex h-screen w-full flex-col overflow-hidden">
-      <div className="sticky top-0 z-10 flex h-14 items-center">Header</div>
+    <div className="flex h-screen w-full flex-col overflow-hidden px-4 md:px-6 lg:px-8">
+      <div className="sticky top-0 z-10 flex h-14 items-center justify-between">
+        Hello
+        <DarkModeToggle />
+      </div>
 
       <div className="flex w-full flex-1 overflow-y-scroll">
         <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col">
-          <div className="mx:px-6 flex w-full flex-1 flex-col px-4 py-24">
+          <div className="flex w-full flex-1 flex-col py-24">
             {messages.map((m) => (
               <div key={m.id} className="whitespace-pre-wrap">
                 {m.role === "user" ? "User: " : "AI: "}
@@ -60,7 +64,7 @@ export default function Chat() {
                   <Button
                     type="submit"
                     className={cn(
-                      "rounded-full bg-gray-400 px-2.5 opacity-50 transition duration-300 group-hover:opacity-100",
+                      "rounded-full bg-muted-foreground px-2.5 opacity-50 transition duration-300 group-hover:opacity-100",
                       input && "bg-primary opacity-100",
                     )}
                   >
@@ -71,8 +75,7 @@ export default function Chat() {
               <div className="mx-auto text-xs text-muted-foreground">
                 {input.length > 3 ? (
                   <>
-                    Use{" "}
-                    <span className="rounded-md bg-slate-100 p-1">shift + return</span>{" "}
+                    Use <span className="rounded-md bg-muted p-1">shift + return</span>{" "}
                     for a new line
                   </>
                 ) : (
