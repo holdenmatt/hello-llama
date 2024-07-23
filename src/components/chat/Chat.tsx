@@ -13,9 +13,11 @@ import { cn } from "@/lib/utils";
 import { ChatMessages } from "./ChatMessage";
 
 export function Chat() {
+  const model = useAppStore((state) => state.model);
   const temperature = useAppStore((state) => state.temperature);
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     body: {
+      model,
       temperature,
     },
   });

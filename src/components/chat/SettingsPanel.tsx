@@ -25,6 +25,8 @@ import {
 import { useAppStore } from "@/lib/useAppStore";
 
 export function SettingsPanel() {
+  const model = useAppStore((state) => state.model);
+  const setModel = useAppStore((state) => state.setModel);
   const temperature = useAppStore((state) => state.temperature);
   const setTemperature = useAppStore((state) => state.setTemperature);
 
@@ -48,7 +50,18 @@ export function SettingsPanel() {
         <fieldset className="mt-8 grid gap-8">
           <div className="grid gap-3">
             <Label htmlFor="model">Model</Label>
-            <Select defaultValue="llama-3.1-70b-versatile">
+            <Select
+              value={model}
+              onValueChange={(model) => {
+                if (
+                  model === "llama-3.1-405b-reasoning" ||
+                  model === "llama-3.1-70b-versatile" ||
+                  model === "llama-3.1-8b-instant"
+                ) {
+                  setModel(model);
+                }
+              }}
+            >
               <SelectTrigger
                 id="model"
                 className="items-start [&_[data-description]]:hidden"
