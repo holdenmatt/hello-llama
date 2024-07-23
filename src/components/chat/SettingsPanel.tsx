@@ -123,7 +123,7 @@ export function SettingsPanel() {
                 type="number"
                 step="0.01"
                 min="0"
-                className="h-9 w-12 border-transparent px-1 text-right hover:border-border"
+                className="no-arrows h-9 w-12 border-transparent px-1 text-right hover:border-border"
                 value={temperature}
                 onChange={handleTemperatureChange}
                 onBlur={handleTemperatureBlur}
