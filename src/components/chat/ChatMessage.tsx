@@ -1,4 +1,5 @@
 import { Message } from "ai/react";
+import ReactMarkdown from "react-markdown";
 
 import { cn } from "@/lib/utils";
 
@@ -21,7 +22,9 @@ const ChatMessage = ({ message }: { message: Message }) => {
           {message.content}
         </div>
       ) : (
-        <div className="max-w-[70%] whitespace-pre-wrap">{message.content}</div>
+        <div className="max-w-[70%] whitespace-pre-wrap">
+          <ReactMarkdown>{message.content}</ReactMarkdown>
+        </div>
       )}
     </div>
   );

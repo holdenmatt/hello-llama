@@ -1,5 +1,5 @@
 This is a simple open source chat bot, built with:
-- [Llama 3.1 405B](https://llama.meta.com/docs/overview),
+- [Llama 3.1 405B](https://llama.meta.com/docs/overview)
 - [Groq](https://wow.groq.com/now-available-on-groq-the-largest-and-most-capable-openly-available-foundation-model-to-date-llama-3-1-405b/)
 - The [Vercel AI SDK](https://sdk.vercel.ai/docs/guides/llama-3_1)
 - [NextJS](https://nextjs.org/), [shadcn/ui](https://ui.shadcn.com/)
