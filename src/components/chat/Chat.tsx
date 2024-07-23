@@ -8,6 +8,8 @@ import { ExpandableTextarea } from "@/components/atoms/ExpandableTextarea";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+import { ChatMessages } from "./ChatMessage";
+
 export function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
@@ -28,14 +30,8 @@ export function Chat() {
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col">
-      <div className="flex w-full flex-1 flex-col py-24">
-        {messages.map((m) => (
-          <div key={m.id} className="whitespace-pre-wrap">
-            {m.role === "user" ? "User: " : "AI: "}
-            {m.content}
-          </div>
-        ))}
-      </div>
+      <ChatMessages messages={messages} />
+
       <div className="sticky bottom-0 w-full pt-6">
         <form
           ref={formRef}
