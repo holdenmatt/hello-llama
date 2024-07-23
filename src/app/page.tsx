@@ -48,7 +48,7 @@ export default function Chat() {
             >
               <div className="group relative flex w-full items-center">
                 <ExpandableTextarea
-                  className="rounded-[30px] px-6 py-4 pr-28 text-lg"
+                  className="rounded-[30px] px-6 py-4 pr-16 text-base"
                   value={input}
                   placeholder="Hello, Llama"
                   autoComplete="off"
@@ -56,12 +56,12 @@ export default function Chat() {
                   onChange={handleInputChange}
                   onKeyDown={handleKeyDown}
                 />
-                <div className="absolute right-0 mx-4">
+                <div className="absolute right-0 mx-2.5">
                   <Button
                     type="submit"
                     className={cn(
                       "rounded-full bg-gray-400 px-2.5 opacity-50 transition duration-300 group-hover:opacity-100",
-                      input && "bg-primary",
+                      input && "bg-primary opacity-100",
                     )}
                   >
                     <ArrowUp className="h-5 w-5" />
