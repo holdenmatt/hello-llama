@@ -1,12 +1,17 @@
+import Image from "next/image";
+
 import { DarkModeToggle } from "@/components/atoms/DarkModeToggle";
 import { Chat } from "@/components/chat/Chat";
 import { SettingsPanel } from "@/components/chat/SettingsPanel";
 
 export default function ChatPage() {
   return (
-    <div className="flex h-screen w-full flex-col overflow-hidden px-4 md:px-6 lg:px-8">
+    <div className="flex h-screen w-full flex-col overflow-hidden px-4">
       <div className="sticky top-0 z-10 flex h-14 items-center justify-between">
-        <div>Hello, Llama 3.1</div>
+        <div className="flex items-center gap-4">
+          <Image priority src="/logo.png" width={40} height={40} alt="Logo" />
+          <div className="text-lg font-semibold">Hello, Llama 3.1!</div>
+        </div>
         <div className="flex gap-1">
           <DarkModeToggle />
           <SettingsPanel />
