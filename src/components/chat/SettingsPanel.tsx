@@ -55,10 +55,7 @@ export function SettingsPanel() {
       <SheetContent className="data-[state=closed]:duration-200 data-[state=open]:duration-200">
         <SheetHeader className="text-left">
           <SheetTitle>Settings</SheetTitle>
-          <SheetDescription className="max-w-48">
-            {`Configure Llama 3.1 settings used by `}
-            <ExternalLink href="https://console.groq.com/docs/models">Groq</ExternalLink>.
-          </SheetDescription>
+          <SheetDescription>{`Configure Llama 3.1 settings`}</SheetDescription>
         </SheetHeader>
 
         <Separator className="my-6" />
@@ -97,7 +94,7 @@ export function SettingsPanel() {
                         <span className="font-medium text-foreground">405B</span>
                       </p>
                       <p className="text-warning text-xs" data-description>
-                        Not yet available (coming soon).
+                        Not yet available (coming soon)
                       </p>
                     </div>
                   </div>

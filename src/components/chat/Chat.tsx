@@ -75,7 +75,7 @@ export function Chat() {
               </Button>
             </div>
           </div>
-          <div className="mx-auto text-center text-xs leading-5 text-muted-foreground">
+          <div className="mx-auto h-10 text-center text-xs leading-5 text-muted-foreground">
             {input.length > 3 ? (
               <>
                 Use <span className="rounded-md bg-muted p-1">shift + return</span> for a
